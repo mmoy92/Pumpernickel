@@ -6,6 +6,7 @@ package {
 	public class Main extends Sprite 
 	{
 		private var fps:FPSMonitor;
+		public var auto:AutoBot;
 		public var manager:NetworkManager;
 		public var dt:DetailTab;
 		public var sm:StockRowManager;
@@ -27,6 +28,8 @@ package {
 			sm = new StockRowManager();
 			gm = new GraphManager();
 			fps = new FPSMonitor();
+			auto = new AutoBot();
+			
 			fps.y = 60;
 			addChild(fps);
 		}

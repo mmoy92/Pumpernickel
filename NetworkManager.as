@@ -63,7 +63,7 @@
 		
 		}
 		
-		private function sendCommand(text:String):void {
+		public function sendCommand(text:String):void {
 			trace(text);
 			socket.writeUTFBytes(text);
 			socket.writeUTFBytes("\n");
@@ -98,11 +98,13 @@
 			if (par[0] == "SECURITIES_OUT") {
 				Main.inst.sm.maxWorth = 0;
 				for (var i:int = 0; i < 10; i++) {
-					Main.inst.sm.getStockRowByName(par[index]).updateWorth(Number(par[index + 1]));
-					Main.inst.sm.getStockRowByName(par[index]).updateDividend(Number(par[index + 2]));
-					//Main.inst.sm.getStockRowByName(par[index]).updateVolatility(Number(par[index+3]));
-					
-					index += 4;
+					if(index < par.length + 2){
+						Main.inst.sm.getStockRowByName(par[index]).updateWorth(Number(par[index + 1]));
+						Main.inst.sm.getStockRowByName(par[index]).updateDividend(Number(par[index + 2]));
+						//Main.inst.sm.getStockRowByName(par[index]).updateVolatility(Number(par[index+3]));
+						
+						index += 4;
+					}
 				}
 				Main.inst.sm.updateBars();
 				

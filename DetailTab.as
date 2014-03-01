@@ -74,12 +74,17 @@
 				this.gotoAndStop(2);
 				youroffers = TextField(this.getChildByName("yourOffers_TXT"));
 				youroffers.text = "No Transactions";
+				
+				Main.inst.auto.startBot();
 			}
 			else
 			{
 				isManual = true;
 				this.gotoAndStop(1);
 				initialize();
+				
+				Main.inst.auto.stopBot();
+				
 			}
 		}
 		
