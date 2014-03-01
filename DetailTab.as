@@ -40,7 +40,6 @@
 			yourCurBid = TextField(this.getChildByName("yourBid_TXT"));
 			yourCurAsk = TextField(this.getChildByName("yourAsk_TXT"));
 			
-			
 			quantIn = TextField(this.getChildByName("amountInput_TXT"));
 			priceIn = TextField(this.getChildByName("priceInput_TXT"));
 			
@@ -56,6 +55,9 @@
 			
 			historyBtn = SimpleButton(this.getChildByName("history_BTN"));
 			historyBtn.addEventListener(MouseEvent.CLICK, onHistoryClicked);
+			
+			this.setCurrentAsk("0 at $0");
+			this.setCurrentBid("0 at $0");
 		}
 		
 		private function onHistoryClicked(event:Event):void
