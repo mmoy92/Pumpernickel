@@ -27,7 +27,7 @@
 			bar = MovieClip(getChildByName("bar_MC"));
 			
 			askAmtTxt = TextField(getChildByName("ask_TXT"));
-			bidAmtTxt = TextField(getChildByName("bid_TXT"));
+			bidAmtTxt = TextField(getChildByName("buy_TXT"));
 			
 			stockNameTxt.text = stock;
 		}
@@ -36,7 +36,8 @@
 			if (i > StockRowManager.inst.maxWorth) {
 				StockRowManager.inst.maxWorth = i + 5;
 			}
-			netWorthTxt.text = i.toString();
+			var str:String = i.toString();
+			netWorthTxt.text = str.slice(0,str.indexOf(".")+5);
 			netWorth = i;
 		}
 		
@@ -52,7 +53,11 @@
 		
 		public function updateBar():void {
 			bar.scaleX = netWorth / StockRowManager.inst.maxWorth;
-			dividendTxt.x = bar.x + bar.width - dividendTxt.textWidth;
+			if (bar.scaleX > 0.7) {
+				dividendTxt.x = bar.x + bar.width - dividendTxt.textWidth * 2;
+			} else {
+				dividendTxt.x = bar.x + bar.width;
+			}
 		}
 	}
 
