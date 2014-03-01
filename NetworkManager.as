@@ -142,7 +142,18 @@
 			StockRowManager.inst.updateDisplay();
 		
 		}
-	
+		
+		function bid(name:String, price:String, amt:String) {
+			socket.writeUTFBytes("BID " + name + " " + price + " " + amt);
+			socket.writeUTFBytes("\n");
+			socket.flush();
+		}
+		
+		function ask(name:String, price:String, amt:String) {
+			socket.writeUTFBytes("ASK " + name + " " + price + " " + amt);
+			socket.writeUTFBytes("\n");
+			socket.flush();
+		}
 	}
 
 }
