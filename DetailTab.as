@@ -20,18 +20,15 @@
 		private var priceIn:TextField;
 		private var cancelAsk:SimpleButton;
 		private var cancelBid:SimpleButton;
+		private var cashBox:TextField;
 		
 		private var yourBidsQuant:Object = new Object();
 		private var yourBidsPrice:Object = new Object();
 		private var yourAsksQuant:Object = new Object();
 		private var yourAsksPrice:Object = new Object();
 		
-		public static var inst:DetailTab;
-		
-		
 		public function DetailTab() 
 		{
-			inst = this;
 			this.stop();
 			
 			initYourAsks();
@@ -44,7 +41,7 @@
 			
 			quantIn = TextField(this.getChildByName("amountInput_TXT"));
 			priceIn = TextField(this.getChildByName("priceInput_TXT"));
-		
+			
 			askBtn = SimpleButton(this.getChildByName("ask_BTN"));
 			bidBtn = SimpleButton(this.getChildByName("bid_BTN"));
 			cancelAsk = SimpleButton(this.getChildByName("cancelAsk_BTN"));
@@ -183,7 +180,7 @@
 		
 		public function setCurrentCash(stock:String)
 		{
-	//		TextField(Main.inst.stage.getChildByname("cash_TXT")).text = stock;
+			TextField(Main.inst.getChildByName("cash_TXT")).text = stock;
 		}
 	}
 	
