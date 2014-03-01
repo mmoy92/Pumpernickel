@@ -36,13 +36,20 @@
 			socket.connect("172.31.231.85", 17429);
 			
 			
-			
 		}
 		
 		function onConnect(e:Event):void {
 			socket.writeUTFBytes("teambread lettuce\nMY_CASH");
 			socket.writeUTFBytes("\n");
 			trace("connect");
+			
+			//bid, ticket, price, share
+			//socket.writeUTFBytes("ASK " + "FB " + "24 " +"50");
+			
+			//socket.writeUTFBytes("\n");
+			//socket.flush();
+			
+			
 		}
 		
 		private function sendRequest(e:Event):void {
@@ -79,20 +86,20 @@
 		function onResponse(e:ProgressEvent):void {
 			if (socket.bytesAvailable > 0) {
 				var str:String = socket.readUTFBytes(socket.bytesAvailable);
-				trace(str);
 				parse(str);
 			}
 		}
 		
 		function parse(str:String):void {
 			var par: Array = str.split(" ");
+			var askIndex:int = 5;
 			
 			if ( par[0] == "SECURITIES_OUT"){
 				var index:int = 1;
 				for ( var i:int = 0; i < 10; i++) {
 					//StockRowManager.inst.getStockRowByName(par[index]).updateWorth(Number(par[index+1]));
 					//StockRowManager.inst.getStockRowByName(par[index]).updateDividend(Number(par[index+2]));
-					//StockRowManager.inst.getStockRowByName(par[index]).updateDividend(Number(par[index+3]));
+					//StockRowManager.inst.getStockRowByName(par[index]).updateVolatility(Number(par[index+3]));
 				
 					trace(par[index]);
 					trace("Worth: " + Number(par[index + 1]));
@@ -102,12 +109,19 @@
 				
 					index += 4;
 				}
+				trace("\n");
 			}
 			else if ( par[0] == "SECURITY_OFFERS_OUT") {
-				//StockRowManager.inst.getStockRowByName(par[index]).updateWorth(Number(par[index+1]));
-				//StockRowManager.inst.getStockRowByName(par[index]).updateDividend(Number(par[index+2]));
+				trace(par[2] + ": " + Number(par[3]));
+				while (par[askIndex] != "ASK") {
+					askIndex++;
+				}
+				trace(par[askIndex + 1] + ": " + Number(par[askIndex + 2]));
+				//StockRowManager.inst.getStockRowByName(par[index]).updateBid(Number(par[3]));
+				//StockRowManager.inst.getStockRowByName(par[index]).updateAsk(Number(par[askIndex+2]));
+
+				
 			}
-			trace("\n");
 		}
 		
 	}
