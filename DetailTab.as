@@ -56,21 +56,20 @@
 			
 			historyBtn = SimpleButton(this.getChildByName("history_BTN"));
 			historyBtn.addEventListener(MouseEvent.CLICK, onHistoryClicked);
-			
-			yourHistory = TextField(this.getChildByName("yourHistory_TXT"));
-			yourHistory.text = "No transactions";
 		}
 		
 		private function onHistoryClicked(event:Event):void
 		{
 			this.gotoAndStop(2);
+			yourHistory = TextField(this.getChildByName("yourHistory_TXT"));
+			yourHistory.text = "None";
 		}
 		
 		private function onAskClicked(event:Event):void
 		{
 			yourAsksQuant[selectedStock.text] = quantIn.text; 
 			yourAsksPrice[selectedStock.text] = priceIn.text;
-			setTo(selectedStock.text);
+			setCurrentAsk(yourAsksQuant[selectedStock.text] + " at $" + yourAsksPrice[selectedStock.text]);
 			sendAskOrder(selectedStock.text, quantIn.text, priceIn.text);
 		}
 		
@@ -78,7 +77,7 @@
 		{
 			yourBidsQuant[selectedStock.text] = quantIn.text;
 			yourBidsPrice[selectedStock.text] = priceIn.text;
-			setTo(selectedStock.text);
+			setCurrentBid(yourBidsQuant[selectedStock.text] + " at $" + yourBidsPrice[selectedStock.text]);
 			sendBidOrder(selectedStock.text, quantIn.text, priceIn.text);
 		}
 		
