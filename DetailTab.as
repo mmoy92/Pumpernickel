@@ -84,7 +84,7 @@
 			sendBidOrder(selectedStock.text, priceIn.text, quantIn.text);
 		}
 		
-		private function onBidX(event:Event):void
+		public function onBidX(event:Event):void
 		{
 			setCurrentBid("0 at $0");
 			yourBidsPrice[selectedStock.text] = "0";
@@ -92,7 +92,7 @@
 			NetworkManager(Main.inst.manager).clearBid(selectedStock.text);
 		}
 		
-		private function onAskX(event:Event):void
+		public function onAskX(event:Event):void
 		{
 			setCurrentAsk("0 at $0");
 			yourAsksPrice[selectedStock.text] = "0";
