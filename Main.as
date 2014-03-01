@@ -6,7 +6,7 @@ package {
 	public class Main extends Sprite 
 	{
 		private var manager:NetworkManager;
-		private var dt:DetailTab;
+		public var dt:DetailTab;
 		private var sm:StockRowManager;
 		
 		public static var inst:Main;

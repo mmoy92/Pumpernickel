@@ -1,5 +1,6 @@
 package {
 	import flash.display.SimpleButton;
+	import flash.text.TextField;
 	
 	/**
 	 * ...
@@ -16,6 +17,8 @@ package {
 		public var SNY:StockRow_MC;
 		public var TSLA:StockRow_MC;
 		public var TWTR:StockRow_MC;
+		
+		public var netWorthTxt:TextField;
 		
 		private var allStockRows:Vector.<StockRow_MC>;
 		public var maxWorth:Number;
@@ -39,15 +42,18 @@ package {
 			
 			allStockRows.push(AAPL, ATVI, EA, FB, GOOG, MSFT, SBUX, SNY, TSLA, TWTR);
 			
-			trace(Main.inst.getChildByName("cash_TXT"));
+			netWorthTxt = TextField(Main.inst.getChildByName("netCash_TXT"));
 			
 			
 		}
 		
 		public function updateBars():void {
+			var totalWorth:Number = 0;
 			for each (var stockRow:StockRow_MC in allStockRows) {
 				stockRow.updateBar();
+				totalWorth += stockRow.netWorth;
 			}
+			netWorthTxt.text = totalWorth.toString();
 		}
 		
 		public function getStockRowByName(str:String):StockRow_MC {
