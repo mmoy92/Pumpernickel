@@ -37,7 +37,7 @@
 				StockRowManager.inst.maxWorth = i + 5;
 			}
 			var str:String = i.toString();
-			netWorthTxt.text = str.slice(0,str.indexOf(".")+5);
+			netWorthTxt.text = str.slice(0, str.indexOf(".") + 5);
 			netWorth = i;
 		}
 		
@@ -45,7 +45,9 @@
 			dividendTxt.text = i.toString();
 		
 		}
-		
+		public function updateStockAmount(i:int) {
+			stockAmtTxt.text = i.toString();
+		}
 		public function updateAskBid(ask:Number, bid:Number):void {
 			askAmtTxt.text = ask.toString();
 			bidAmtTxt.text = bid.toString();
