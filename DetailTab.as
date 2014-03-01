@@ -22,8 +22,8 @@
 		private var cancelAsk:SimpleButton;
 		private var cancelBid:SimpleButton;
 		private var cashBox:TextField;
-		private var historyBtn:SimpleButton;
-		private var yourHistory:TextField;
+		private var offersBtn:SimpleButton;
+		private var youroffers:TextField;
 		
 		private var yourBidsQuant:Object = new Object();
 		private var yourBidsPrice:Object = new Object();
@@ -54,18 +54,18 @@
 			cancelAsk.addEventListener(MouseEvent.CLICK, onAskX);
 			cancelBid.addEventListener(MouseEvent.CLICK, onBidX);
 			
-			historyBtn = SimpleButton(this.getChildByName("history_BTN"));
-			historyBtn.addEventListener(MouseEvent.CLICK, onHistoryClicked);
+			offersBtn = SimpleButton(this.getChildByName("offers_BTN"));
+			offersBtn.addEventListener(MouseEvent.CLICK, onOffersClicked);
 			
 			this.setCurrentAsk("0 at $0");
 			this.setCurrentBid("0 at $0");
 		}
 		
-		private function onHistoryClicked(event:Event):void
+		private function onOffersClicked(event:Event):void
 		{
 			this.gotoAndStop(2);
-			yourHistory = TextField(this.getChildByName("yourHistory_TXT"));
-			yourHistory.text = "None";
+			youroffers = TextField(this.getChildByName("youroffers_TXT"));
+			youroffers.text = "None";
 		}
 		
 		private function onAskClicked(event:Event):void
