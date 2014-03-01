@@ -70,7 +70,7 @@
 				isManual = false;
 				this.gotoAndStop(2);
 				youroffers = TextField(this.getChildByName("yourOffers_TXT"));
-				youroffers.text = "None";
+				youroffers.text = "No Transactions";
 			}
 			else
 			{
@@ -209,6 +209,14 @@
 		public function setCurrentCash(stock:String)
 		{
 			TextField(Main.inst.getChildByName("cash_TXT")).text = stock;
+		}
+		
+		public function post(stock:String):void
+		{
+			if (!isManual)
+			{
+				youroffers.appendText("\n" + stock);
+			}
 		}
 		
 	}
