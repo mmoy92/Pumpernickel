@@ -33,10 +33,17 @@
 		
 		public function DetailTab() 
 		{
-			this.stop();
-			
 			initYourAsks();
 			initYourBids();
+			initialize();
+			this.setCurrentAsk("0 at $0");
+			this.setCurrentBid("0 at $0");
+			isManual = true;
+		}
+		
+		public function initialize()
+		{
+			this.stop();
 			
 			selectedStock = TextField(this.getChildByName("selectedStock_TXT"));
 			yourCurBid = TextField(this.getChildByName("yourBid_TXT"));
@@ -57,10 +64,6 @@
 			
 			offersBtn = SimpleButton(this.getChildByName("offers_BTN"));
 			offersBtn.addEventListener(MouseEvent.CLICK, onOffersClicked);
-			
-			this.setCurrentAsk("0 at $0");
-			this.setCurrentBid("0 at $0");
-			isManual = true;
 		}
 		
 		private function onOffersClicked(event:Event):void
@@ -76,6 +79,7 @@
 			{
 				isManual = true;
 				this.gotoAndStop(1);
+				initialize();
 			}
 		}
 		
@@ -178,7 +182,7 @@
 		
 		private function sendAskOrder(stock:String, price:String, quant:String):void
 		{
-			if (Main.inst.sm.getStockRowByName(stock).stockAmt > 0)
+			if (Main.inst.sm.getStockRowByName(stock).stockAmt > Number(quant))
 			{
 				NetworkManager(Main.inst.manager).ask(stock, price, quant);
 			}	
