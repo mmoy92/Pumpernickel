@@ -56,6 +56,7 @@ package {
 			for each (var stockRow:StockRow_MC in allStockRows) {
 				totalWorth += stockRow.stockAmt * stockRow.askPrice;
 			}
+			
 			if (!isNaN(totalWorth)) {
 				netWorthTxt.text = totalWorth.toString();
 			}

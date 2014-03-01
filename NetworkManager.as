@@ -17,7 +17,7 @@
 		private var names:Array = new Array("AAPL", "ATVI", "EA", "FB", "GOOG", "MSFT", "SBUX", "SNY", "TSLA", "TWTR");
 		
 		public function NetworkManager() {
-			myTimer = new Timer(250);
+			myTimer = new Timer(500);
 			myTimer.addEventListener(TimerEvent.TIMER, sendRequest);
 			myTimer.start();
 			
@@ -64,10 +64,11 @@
 		}
 		
 		public function sendCommand(text:String):void {
-			trace(text);
+			Main.inst.stage.frameRate = 1;
 			socket.writeUTFBytes(text);
 			socket.writeUTFBytes("\n");
 			socket.flush();
+			Main.inst.stage.frameRate = 60;
 		}
 		
 		function onClose(e:Event):void {
@@ -108,14 +109,14 @@
 				}
 				Main.inst.sm.updateBars();
 				
-				trace("");
+				//trace("");
 				
 			} else if (par[0] == "SECURITY_OFFERS_OUT") {
 				while (par[askIndex] != "ASK") {
 					askIndex++;
 				}
 				Main.inst.sm.getStockRowByName(par[2]).updateAskBid(Number(par[askIndex + 2]), Number(par[3]));
-				trace("");
+				//trace("");
 			}
 			
 			else if (par[0] == "MY_SECURITIES_OUT") {
@@ -123,32 +124,32 @@
 					Main.inst.sm.getStockRowByName(par[index]).updateMySecurities(Number(par[index + 1]));
 					index += 3;
 				}
-				trace("");
+				//trace("");
 			}
 			
 			else if (par[0] == "MY_CASH_OUT") {
 				Main.inst.dt.cash = par[1];
 				DetailTab(Main.inst.dt).setCurrentCash(par[1]);
 				trace("");
-			} else {
-				for (var a:int = 0; a < par.length; a++) {
-					trace(par[a]);
-				}
 			}
 			Main.inst.sm.updateDisplay();
 		
 		}
 		
 		function bid(name:String, price:String, amt:String) {
+			Main.inst.stage.frameRate = 1;
 			socket.writeUTFBytes("BID " + name + " " + price + " " + amt);
 			socket.writeUTFBytes("\n");
 			socket.flush();
+			Main.inst.stage.frameRate = 60;
 		}
 		
 		function ask(name:String, price:String, amt:String) {
+			Main.inst.stage.frameRate = 1;
 			socket.writeUTFBytes("ASK " + name + " " + price + " " + amt);
 			socket.writeUTFBytes("\n");
 			socket.flush();
+			Main.inst.stage.frameRate = 60;
 		}
 		
 		function clearBid(name:String) {
