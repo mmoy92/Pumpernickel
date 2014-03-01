@@ -24,6 +24,7 @@
 		private var cashBox:TextField;
 		private var offersBtn:SimpleButton;
 		private var youroffers:TextField;
+		private var isManual:Boolean;
 		
 		private var yourBidsQuant:Object = new Object();
 		private var yourBidsPrice:Object = new Object();
@@ -32,10 +33,17 @@
 		
 		public function DetailTab() 
 		{
-			this.stop();
-			
 			initYourAsks();
 			initYourBids();
+			initialize();
+			this.setCurrentAsk("0 at $0");
+			this.setCurrentBid("0 at $0");
+			isManual = true;
+		}
+		
+		public function initialize()
+		{
+			this.stop();
 			
 			selectedStock = TextField(this.getChildByName("selectedStock_TXT"));
 			yourCurBid = TextField(this.getChildByName("yourBid_TXT"));
@@ -56,16 +64,23 @@
 			
 			offersBtn = SimpleButton(this.getChildByName("offers_BTN"));
 			offersBtn.addEventListener(MouseEvent.CLICK, onOffersClicked);
-			
-			this.setCurrentAsk("0 at $0");
-			this.setCurrentBid("0 at $0");
 		}
 		
 		private function onOffersClicked(event:Event):void
 		{
-			this.gotoAndStop(2);
-			youroffers = TextField(this.getChildByName("youroffers_TXT"));
-			youroffers.text = "None";
+			if (isManual)
+			{
+				isManual = false;
+				this.gotoAndStop(2);
+				youroffers = TextField(this.getChildByName("yourOffers_TXT"));
+				youroffers.text = "No Transactions";
+			}
+			else
+			{
+				isManual = true;
+				this.gotoAndStop(1);
+				initialize();
+			}
 		}
 		
 		private function onAskClicked(event:Event):void
@@ -167,7 +182,7 @@
 		
 		private function sendAskOrder(stock:String, price:String, quant:String):void
 		{
-			if (Main.inst.sm.getStockRowByName(stock).stockAmt > 0)
+			if (Main.inst.sm.getStockRowByName(stock).stockAmt > Number(quant))
 			{
 				NetworkManager(Main.inst.manager).ask(stock, price, quant);
 			}	
@@ -198,6 +213,14 @@
 		public function setCurrentCash(stock:String)
 		{
 			TextField(Main.inst.getChildByName("cash_TXT")).text = stock;
+		}
+		
+		public function post(stock:String):void
+		{
+			if (!isManual)
+			{
+				youroffers.appendText("\n" + stock);
+			}
 		}
 		
 	}
