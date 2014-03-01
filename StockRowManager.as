@@ -55,10 +55,13 @@ package {
 		
 		public function updateDisplay():void {
 			var totalWorth:Number = Main.inst.dt.cash;
+			
 			for each (var stockRow:StockRow_MC in allStockRows) {
 				totalWorth += stockRow.stockAmt * stockRow.askPrice;
 			}
-			netWorthTxt.text = totalWorth.toString();
+			if (!isNaN(totalWorth)) {
+				netWorthTxt.text = totalWorth.toString();
+			}
 		}
 		
 		public function getStockRowByName(str:String):StockRow_MC {

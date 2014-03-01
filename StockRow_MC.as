@@ -72,10 +72,13 @@
 		}
 		
 		public function updateStockAmount(i:int) {
+			stockAmt = Number(i);
 			stockAmtTxt.text = i.toString();
 		}
 		
 		public function updateAskBid(ask:Number, bid:Number):void {
+			askPrice = ask;
+			
 			var askStr:String = ask.toString();
 			askAmtTxt.text = askStr.slice(0, askStr.indexOf(".") + 3);
 			
