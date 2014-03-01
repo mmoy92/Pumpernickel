@@ -73,7 +73,7 @@
 			yourAsksQuant[selectedStock.text] = quantIn.text; 
 			yourAsksPrice[selectedStock.text] = priceIn.text;
 			setCurrentAsk(yourAsksQuant[selectedStock.text] + " at $" + yourAsksPrice[selectedStock.text]);
-			sendAskOrder(selectedStock.text, quantIn.text, priceIn.text);
+			sendAskOrder(selectedStock.text, priceIn.text, quantIn.text);
 		}
 		
 		private function onBidClicked(event:Event):void
@@ -81,7 +81,7 @@
 			yourBidsQuant[selectedStock.text] = quantIn.text;
 			yourBidsPrice[selectedStock.text] = priceIn.text;
 			setCurrentBid(yourBidsQuant[selectedStock.text] + " at $" + yourBidsPrice[selectedStock.text]);
-			sendBidOrder(selectedStock.text, quantIn.text, priceIn.text);
+			sendBidOrder(selectedStock.text, priceIn.text, quantIn.text);
 		}
 		
 		private function onBidX(event:Event):void
@@ -165,14 +165,14 @@
 			yourCurAsk.text = str;
 		}
 		
-		private function sendAskOrder(stock:String, quant:String, price:String):void
+		private function sendAskOrder(stock:String, price:String, quant:String):void
 		{
-			//todo
+			NetworkManager(Main.inst.manager).ask(stock, price, quant);
 		}
 		
-		private function sendBidOrder(stock:String, quant:String, price:String):void
+		private function sendBidOrder(stock:String, price:String, quant:String):void
 		{
-			//todo
+			NetworkManager(Main.inst.manager).bid(stock, price, quant);
 		}
 		
 		public function setTo(stock:String)
