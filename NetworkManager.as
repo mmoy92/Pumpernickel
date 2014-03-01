@@ -41,22 +41,32 @@
 			trace("connect");
 		
 			//bid, ticket, price, share
-			//socket.writeUTFBytes("ASK " + "FB " + "24 " +"50");
-		
+			//socket.writeUTFBytes("BID " + "SNY " + "15.2 " +"20");
+			//socket.writeUTFBytes("MY_SECURITIES");
 			//socket.writeUTFBytes("\n");
 			//socket.flush();
 		
 		}
 		
 		private function sendRequest(e:Event):void {
+			socket.writeUTFBytes("MY_CASH");
+			socket.writeUTFBytes("\n");
+			socket.flush()
+			
 			socket.writeUTFBytes("SECURITIES");
 			socket.writeUTFBytes("\n");
 			socket.flush();
+			
 			for (var i:int = 0; i < 10; i++) {
 				socket.writeUTFBytes("OFFERS " + names[i]);
 				socket.writeUTFBytes("\n");
 				socket.flush();
 			}
+			
+			socket.writeUTFBytes("MY_SECURITIES");
+			socket.writeUTFBytes("\n");
+			socket.flush()
+			
 		}
 		
 		private function sendCommand(text:String):void {
@@ -90,34 +100,43 @@
 		function parse(str:String):void {
 			var par:Array = str.split(" ");
 			var askIndex:int = 5;
-			
+			var index:int = 1;
 			if (par[0] == "SECURITIES_OUT") {
-				var index:int = 1;
 				StockRowManager.inst.maxWorth = 0;
 				for (var i:int = 0; i < 10; i++) {
 					StockRowManager.inst.getStockRowByName(par[index]).updateWorth(Number(par[index + 1]));
 					StockRowManager.inst.getStockRowByName(par[index]).updateDividend(Number(par[index + 2]));
 					//StockRowManager.inst.getStockRowByName(par[index]).updateVolatility(Number(par[index+3]));
-					
-					//trace(par[index]);
-					//trace("Worth: " + Number(par[index + 1]));
-					//trace("Dividend: " + Number(par[index + 2]));
-					//trace("Volatility: " + Number(par[index + 3]));
-					
+	
 					index += 4;
 				}
-				trace("\n");
+				trace("");
 				
 				StockRowManager.inst.updateBars();
 			} else if (par[0] == "SECURITY_OFFERS_OUT") {
-				trace(par[2] + " Bid: " + Number(par[3]));
 				while (par[askIndex] != "ASK") {
 					askIndex++;
 				}
-				trace(par[askIndex + 1] + ": " + Number(par[askIndex + 2]));
-				//trace(Number(par[3]));
-				StockRowManager.inst.getStockRowByName(par[2]).updateAskBid(Number(par[askIndex + 2]),Number(par[3]) );
-				
+				StockRowManager.inst.getStockRowByName(par[2]).updateAskBid(Number(par[askIndex + 2]), Number(par[3]) );
+				trace("");
+			}
+			
+			else if ( par[0] == "MY_SECURITIES_OUT") {
+				for ( var own:int = 0; own < 10; own++) {
+					StockRowManager.inst.getStockRowByName(par[index]).updateMySecurities(Number(par[index + 1]));
+					index += 3;
+				}
+				trace("");
+			}
+			
+			else if ( par[0] == "MY_CASH_OUT") {
+				DetailTab(Main.inst.dt).setCurrentCash(par[1]);
+				trace("");
+			}
+			else {
+				for ( var a:int = 0; a < par.length; a++) {
+					trace(par[a]);
+				}
 			}
 		}
 	
