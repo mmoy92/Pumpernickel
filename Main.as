@@ -10,8 +10,6 @@ package {
 	public class Main extends Sprite {
 		//private var socket:CustomSocket;
 		private var socket:Socket;
-		private var outputTxt:TextField;
-		private var inputTxt:TextField;
 		private var myTimer:Timer;
 		
 		public function Main() {
@@ -34,16 +32,10 @@ package {
 			socket.connect("172.31.231.85", 17429);
 			
 			addEventListener(Event.ADDED_TO_STAGE, onAdd);
-			
-			addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 		
 		}
 		
-		private function onKeyDown(e:KeyboardEvent):void {
-			if (e.keyCode == Keyboard.ENTER) {
-				sendCommand(inputTxt.text);
-			}
-		}
+
 		
 		private function sendCommand(text:String):void {
 			trace(text);
@@ -61,8 +53,6 @@ package {
 		
 		private function onAdd(e:Event):void {
 			removeEventListener(Event.ADDED_TO_STAGE, onAdd);
-			outputTxt = TextField(getChildByName("output_TXT"));
-			inputTxt = TextField(getChildByName("input_TXT"));
 		}
 		
 		function onConnect(e:Event):void {
@@ -88,8 +78,7 @@ package {
 		function onResponse(e:ProgressEvent):void {
 			if (socket.bytesAvailable > 0) {
 				var str:String = socket.readUTFBytes(socket.bytesAvailable);
-				outputTxt.text = str;
-				trace("response");
+				trace(str);
 			}
 		}
 	}
