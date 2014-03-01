@@ -31,7 +31,7 @@ package {
 			auto = new AutoBot();
 			
 			fps.y = 60;
-			addChild(fps);
+			//addChild(fps);
 		}
 
 	}

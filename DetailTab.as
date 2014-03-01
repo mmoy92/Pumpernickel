@@ -217,7 +217,7 @@
 		
 		public function setCurrentCash(stock:String)
 		{
-			TextField(Main.inst.getChildByName("cash_TXT")).text = stock;
+			TextField(Main.inst.getChildByName("cash_TXT")).text = stock.slice(0, stock.indexOf(".") + 5);;
 		}
 		
 		public function post(stock:String):void

@@ -71,13 +71,8 @@
 		}
 		
 		public function updateDividend(i:Number):void {
-			dividendTxt.text = i.toString();
+			dividendTxt.text = "+" + i.toString();
 		
-		}
-		
-		public function updateStockAmount(i:int) {
-			stockAmt = Number(i);
-			stockAmtTxt.text = i.toString();
 		}
 		
 		public function updateAskBid(ask:Number, bid:Number):void {
@@ -96,9 +91,9 @@
 			var clr:int;
 			var amt:Number = grade / 20;
 			
-			if (grade < -5) {
+			if (grade < -1) {
 				clr = 0xFF0000;
-			} else if (grade > 5) {
+			} else if (grade > 1) {
 				clr = 0x33cc66;
 				
 			} else {
@@ -116,7 +111,11 @@
 		
 		public function updateMySecurities(number:Number):void {
 			stockAmt = number;
-			stockAmtTxt.text = stockAmt.toString();
+			if (number == 0) {
+				stockAmtTxt.text = "";
+			} else {
+				stockAmtTxt.text = stockAmt.toString();
+			}
 		}
 	}
 

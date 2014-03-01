@@ -17,7 +17,7 @@
 		private var names:Array = new Array("AAPL", "ATVI", "EA", "FB", "GOOG", "MSFT", "SBUX", "SNY", "TSLA", "TWTR");
 		
 		public function NetworkManager() {
-			myTimer = new Timer(500);
+			myTimer = new Timer(1000);
 			myTimer.addEventListener(TimerEvent.TIMER, sendRequest);
 			myTimer.start();
 			
@@ -96,10 +96,11 @@
 			var par:Array = str.split(" ");
 			var askIndex:int = 5;
 			var index:int = 1;
+			
 			if (par[0] == "SECURITIES_OUT") {
 				Main.inst.sm.maxWorth = 0;
 				for (var i:int = 0; i < 10; i++) {
-					if(index < par.length + 2){
+					if(index < par.length){
 						Main.inst.sm.getStockRowByName(par[index]).updateWorth(Number(par[index + 1]));
 						Main.inst.sm.getStockRowByName(par[index]).updateDividend(Number(par[index + 2]));
 						//Main.inst.sm.getStockRowByName(par[index]).updateVolatility(Number(par[index+3]));

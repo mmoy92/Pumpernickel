@@ -30,10 +30,12 @@ package {
 		
 		public function startBot():void {
 			myTimer.start();
+			myTimer2.start();
 		}
 		
 		public function stopBot():void {
 			myTimer.stop();
+			myTimer2.stop();
 		}
 		
 		private function tryBid(e:TimerEvent):void {
@@ -97,7 +99,7 @@ package {
 			// only want less than grade 15
 			for (var i:int = 0; i < 10; i++) {
 				tempStock = Main.inst.sm.getStockRowByName(names[i]);
-				if (tempStock.grade < 15 ) {
+				if ((tempStock.grade < 15) && (tempStock.stockAmt > 0)) {
 					elimName.push(tempStock);
 				}
 			}

@@ -58,7 +58,8 @@ package {
 			}
 			
 			if (!isNaN(totalWorth)) {
-				netWorthTxt.text = totalWorth.toString();
+				var totalStr:String = totalWorth.toString();
+				netWorthTxt.text = totalStr.slice(0, totalStr.indexOf(".") + 5);
 			}
 		}
 		
