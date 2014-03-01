@@ -22,8 +22,8 @@
 		private var cancelAsk:SimpleButton;
 		private var cancelBid:SimpleButton;
 		private var cashBox:TextField;
-		private var historyBtn:SimpleButton;
-		private var yourHistory:TextField;
+		private var offersBtn:SimpleButton;
+		private var youroffers:TextField;
 		
 		private var yourBidsQuant:Object = new Object();
 		private var yourBidsPrice:Object = new Object();
@@ -54,18 +54,18 @@
 			cancelAsk.addEventListener(MouseEvent.CLICK, onAskX);
 			cancelBid.addEventListener(MouseEvent.CLICK, onBidX);
 			
-			historyBtn = SimpleButton(this.getChildByName("history_BTN"));
-			historyBtn.addEventListener(MouseEvent.CLICK, onHistoryClicked);
+			offersBtn = SimpleButton(this.getChildByName("offers_BTN"));
+			offersBtn.addEventListener(MouseEvent.CLICK, onOffersClicked);
 			
 			this.setCurrentAsk("0 at $0");
 			this.setCurrentBid("0 at $0");
 		}
 		
-		private function onHistoryClicked(event:Event):void
+		private function onOffersClicked(event:Event):void
 		{
 			this.gotoAndStop(2);
-			yourHistory = TextField(this.getChildByName("yourHistory_TXT"));
-			yourHistory.text = "None";
+			youroffers = TextField(this.getChildByName("youroffers_TXT"));
+			youroffers.text = "None";
 		}
 		
 		private function onAskClicked(event:Event):void
@@ -73,7 +73,7 @@
 			yourAsksQuant[selectedStock.text] = quantIn.text; 
 			yourAsksPrice[selectedStock.text] = priceIn.text;
 			setCurrentAsk(yourAsksQuant[selectedStock.text] + " at $" + yourAsksPrice[selectedStock.text]);
-			sendAskOrder(selectedStock.text, quantIn.text, priceIn.text);
+			sendAskOrder(selectedStock.text, priceIn.text, quantIn.text);
 		}
 		
 		private function onBidClicked(event:Event):void
@@ -81,7 +81,7 @@
 			yourBidsQuant[selectedStock.text] = quantIn.text;
 			yourBidsPrice[selectedStock.text] = priceIn.text;
 			setCurrentBid(yourBidsQuant[selectedStock.text] + " at $" + yourBidsPrice[selectedStock.text]);
-			sendBidOrder(selectedStock.text, quantIn.text, priceIn.text);
+			sendBidOrder(selectedStock.text, priceIn.text, quantIn.text);
 		}
 		
 		private function onBidX(event:Event):void
@@ -165,14 +165,14 @@
 			yourCurAsk.text = str;
 		}
 		
-		private function sendAskOrder(stock:String, quant:String, price:String):void
+		private function sendAskOrder(stock:String, price:String, quant:String):void
 		{
-			//todo
+			NetworkManager(Main.inst.manager).ask(stock, price, quant);
 		}
 		
-		private function sendBidOrder(stock:String, quant:String, price:String):void
+		private function sendBidOrder(stock:String, price:String, quant:String):void
 		{
-			//todo
+			NetworkManager(Main.inst.manager).bid(stock, price, quant);
 		}
 		
 		public function setTo(stock:String)
