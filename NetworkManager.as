@@ -17,7 +17,7 @@
 		private var names:Array = new Array("AAPL", "ATVI", "EA", "FB", "GOOG", "MSFT", "SBUX", "SNY", "TSLA", "TWTR");
 		
 		public function NetworkManager() {
-			myTimer = new Timer(1000);
+			myTimer = new Timer(250);
 			myTimer.addEventListener(TimerEvent.TIMER, sendRequest);
 			myTimer.start();
 			

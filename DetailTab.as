@@ -167,8 +167,10 @@
 		
 		private function sendAskOrder(stock:String, price:String, quant:String):void
 		{
-			NetworkManager(Main.inst.manager).ask(stock, price, quant);
-		}
+			if (StockRowManager.inst.getStockRowByName(stock).stockAmt > 0)
+			{
+				NetworkManager(Main.inst.manager).ask(stock, price, quant);
+			}	
 		
 		private function sendBidOrder(stock:String, price:String, quant:String):void
 		{
