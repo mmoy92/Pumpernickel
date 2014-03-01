@@ -21,6 +21,8 @@
 		private var cancelAsk:SimpleButton;
 		private var cancelBid:SimpleButton;
 		private var cashBox:TextField;
+		private var historyBtn:SimpleButton;
+		private var yourHistory:TextField;
 		
 		private var yourBidsQuant:Object = new Object();
 		private var yourBidsPrice:Object = new Object();
@@ -51,6 +53,17 @@
 			bidBtn.addEventListener(MouseEvent.CLICK, onBidClicked);
 			cancelAsk.addEventListener(MouseEvent.CLICK, onAskX);
 			cancelBid.addEventListener(MouseEvent.CLICK, onBidX);
+			
+			historyBtn = SimpleButton(this.getChildByName("history_BTN"));
+			historyBtn.addEventListener(MouseEvent.CLICK, onHistoryClicked);
+			
+			yourHistory = TextField(this.getChildByName("yourHistory_TXT"));
+			yourHistory.text = "No transactions";
+		}
+		
+		private function onHistoryClicked(event:Event):void
+		{
+			this.gotoAndStop(2);
 		}
 		
 		private function onAskClicked(event:Event):void
@@ -182,6 +195,7 @@
 		{
 			TextField(Main.inst.getChildByName("cash_TXT")).text = stock;
 		}
+		
 	}
 	
 }
