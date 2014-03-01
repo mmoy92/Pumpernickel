@@ -21,6 +21,7 @@
 		public var netWorth:Number;
 		public var stockAmt:Number;
 		public var askPrice:Number;
+		public var bidPrice:Number;
 		public var grade:int;
 		
 		public function StockRow_MC() {
@@ -29,6 +30,7 @@
 			grade = 0;
 			stockAmt = 0;
 			askPrice = 0;
+			bidPrice = 0;
 			
 			stockAmtTxt = TextField(getChildByName("stockAmt_TXT"));
 			stockNameTxt = TextField(getChildByName("stockName_TXT"));
@@ -65,7 +67,7 @@
 			
 			netWorth = i;
 			
-			
+			Main.inst.gm.getGraphByName(stock).update(netWorth);
 		}
 		
 		public function updateDividend(i:Number):void {
@@ -80,6 +82,7 @@
 		
 		public function updateAskBid(ask:Number, bid:Number):void {
 			askPrice = ask;
+			bidPrice = bid;
 			
 			var askStr:String = ask.toString();
 			askAmtTxt.text = askStr.slice(0, askStr.indexOf(".") + 3);
@@ -91,9 +94,9 @@
 		public function updateBar():void {
 			var newScale:Number = netWorth / Main.inst.sm.maxWorth;
 			var clr:int;
-			var amt:Number = grade/20;
+			var amt:Number = grade / 20;
 			
-			if (grade < - 5) {
+			if (grade < -5) {
 				clr = 0xFF0000;
 			} else if (grade > 5) {
 				clr = 0x33cc66;
@@ -103,7 +106,7 @@
 				amt = 1;
 			}
 			amt = Math.abs(amt);
-			TweenMax.to(bar, 0.5, {scaleX: newScale, ease: Strong.easeOut, colorTransform:{tint:clr, tintAmount:amt}});
+			TweenMax.to(bar, 0.5, {scaleX: newScale, ease: Strong.easeOut, colorTransform: {tint: clr, tintAmount: amt}});
 			//if (bar.scaleX > 0.7) {
 			//dividendTxt.x = bar.x + bar.width - dividendTxt.textWidth * 2;
 			//} else {
@@ -111,10 +114,9 @@
 			//}
 		}
 		
-		public function updateMySecurities(number:Number):void 
-		{
+		public function updateMySecurities(number:Number):void {
 			stockAmt = number;
-			stockAmtTxt.text = stockAmt.toString(); 
+			stockAmtTxt.text = stockAmt.toString();
 		}
 	}
 

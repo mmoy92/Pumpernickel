@@ -41,7 +41,6 @@ package {
 			allStockRows.push(AAPL, ATVI, EA, FB, GOOG, MSFT, SBUX, SNY, TSLA, TWTR);
 			
 			netWorthTxt = TextField(Main.inst.getChildByName("netCash_TXT"));
-		
 		}
 		
 		public function updateBars():void {

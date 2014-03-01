@@ -30,8 +30,14 @@ package {
 			SNY = Graph(Main.inst.getChildByName("graph_SNY"));
 			TSLA = Graph(Main.inst.getChildByName("graph_TSLA"));
 			TWTR = Graph(Main.inst.getChildByName("graph_TWTR"));
-			
+			//
 			allGraphs.push(AAPL, ATVI, EA, FB, GOOG, MSFT, SBUX, SNY, TSLA, TWTR);
+			
+			for (var i:uint = 0; i < allGraphs.length; i++) {
+				if (i % 2 == 0) {
+					allGraphs[i].gotoAndStop(2);
+				}
+			}
 		}
 		public function getGraphByName(str:String):Graph {
 			if (str == "AAPL") {
