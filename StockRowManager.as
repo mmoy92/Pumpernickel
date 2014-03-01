@@ -1,4 +1,5 @@
 package {
+	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
 	import flash.text.TextField;
 	
@@ -21,6 +22,8 @@ package {
 		public var netWorthTxt:TextField;
 		
 		private var allStockRows:Vector.<StockRow_MC>;
+		public var highlighter:MovieClip;
+		public var selector:MovieClip;
 		public var maxWorth:Number;
 		
 		public function StockRowManager() {
@@ -41,6 +44,9 @@ package {
 			allStockRows.push(AAPL, ATVI, EA, FB, GOOG, MSFT, SBUX, SNY, TSLA, TWTR);
 			
 			netWorthTxt = TextField(Main.inst.getChildByName("netCash_TXT"));
+			
+			selector = MovieClip(Main.inst.getChildByName("selector_MC"));
+			highlighter = MovieClip(Main.inst.getChildByName("highlighter_MC"));
 		}
 		
 		public function updateBars():void {

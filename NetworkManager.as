@@ -113,7 +113,7 @@
 				//trace("");
 				
 			} else if (par[0] == "SECURITY_OFFERS_OUT") {
-				while (par[askIndex] != "ASK") {
+				while (par[askIndex] != "ASK" && askIndex <= 50) {
 					askIndex++;
 				}
 				Main.inst.sm.getStockRowByName(par[2]).updateAskBid(Number(par[askIndex + 2]), Number(par[3]));

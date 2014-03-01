@@ -45,10 +45,17 @@
 			stockNameTxt.text = stock;
 			
 			addEventListener(MouseEvent.MOUSE_DOWN, onClick);
+			addEventListener(MouseEvent.MOUSE_OVER, onHover);
+		}
+		
+		private function onHover(e:MouseEvent):void 
+		{
+			TweenMax.to(Main.inst.sm.highlighter, 0.5, {y: y, ease: Strong.easeOut});
 		}
 		
 		private function onClick(e:MouseEvent):void {
 			Main.inst.dt.setTo(stock);
+			TweenMax.to(Main.inst.sm.selector, 0.5, {y: y, ease: Strong.easeOut});
 		}
 		
 		public function updateWorth(i:Number):void {

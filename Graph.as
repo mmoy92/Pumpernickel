@@ -1,10 +1,13 @@
 ﻿package {
 	
+	import com.greensock.easing.Strong;
+	import com.greensock.TweenMax;
 	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.text.TextField;
 	
 	public class Graph extends MovieClip {
+		private var tri:MovieClip;
 		public var stockName:TextField;
 		public var worthVector:Vector.<Number>;
 		
@@ -28,6 +31,7 @@
 			myLines = new Shape();
 			
 			stockName = TextField(getChildByName("stockName_TXT"));
+			tri = MovieClip(getChildByName("triangle"));
 			
 			stockName.text = name.slice(6);
 			addChild(myMask);
@@ -61,6 +65,17 @@
 				var s:Number = (val - minVal) / (diff);
 				myLines.graphics.lineTo(i * 17, s * -116);
 			}
+			
+			if (Main.inst.sm.getStockRowByName(stockName.text).grade > 0) {
+				tri.gotoAndStop(1);
+				tri.y = -37;
+			TweenMax.to(tri, 0.5, { y: -24.75, ease:Strong.easeOut } );
+			} else {
+				tri.gotoAndStop(2);
+				tri.y = -12;
+			TweenMax.to(tri, 0.5, { y: -24.75, ease:Strong.easeOut } );
+			}
+			
 			//myLines.height = 116;
 		
 		}
