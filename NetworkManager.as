@@ -40,12 +40,6 @@
 			socket.writeUTFBytes("\n");
 			trace("connect");
 		
-			//bid, ticket, price, share
-			//socket.writeUTFBytes("BID " + "SNY " + "15.2 " +"20");
-			//socket.writeUTFBytes("MY_SECURITIES");
-			//socket.writeUTFBytes("\n");
-			//socket.flush();
-		
 		}
 		
 		private function sendRequest(e:Event):void {
@@ -151,6 +145,18 @@
 		
 		function ask(name:String, price:String, amt:String) {
 			socket.writeUTFBytes("ASK " + name + " " + price + " " + amt);
+			socket.writeUTFBytes("\n");
+			socket.flush();
+		}
+		
+		function clearBid(name:String) {
+			socket.writeUTFBytes("CLEAR_BID " + name);
+			socket.writeUTFBytes("\n");
+			socket.flush();
+		}
+		
+		function clearAsk(name:String) {
+			socket.writeUTFBytes("CLEAR_ASK " + name);
 			socket.writeUTFBytes("\n");
 			socket.flush();
 		}
