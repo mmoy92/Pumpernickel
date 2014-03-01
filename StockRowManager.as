@@ -22,10 +22,8 @@ package {
 		
 		private var allStockRows:Vector.<StockRow_MC>;
 		public var maxWorth:Number;
-		public static var inst:StockRowManager;
 		
 		public function StockRowManager() {
-			inst = this;
 			maxWorth = 0;
 			allStockRows = new Vector.<StockRow_MC>();
 			

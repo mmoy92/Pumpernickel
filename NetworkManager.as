@@ -96,15 +96,15 @@
 			var askIndex:int = 5;
 			var index:int = 1;
 			if (par[0] == "SECURITIES_OUT") {
-				StockRowManager.inst.maxWorth = 0;
+				Main.inst.sm.maxWorth = 0;
 				for (var i:int = 0; i < 10; i++) {
-					StockRowManager.inst.getStockRowByName(par[index]).updateWorth(Number(par[index + 1]));
-					StockRowManager.inst.getStockRowByName(par[index]).updateDividend(Number(par[index + 2]));
-					//StockRowManager.inst.getStockRowByName(par[index]).updateVolatility(Number(par[index+3]));
+					Main.inst.sm.getStockRowByName(par[index]).updateWorth(Number(par[index + 1]));
+					Main.inst.sm.getStockRowByName(par[index]).updateDividend(Number(par[index + 2]));
+					//Main.inst.sm.getStockRowByName(par[index]).updateVolatility(Number(par[index+3]));
 					
 					index += 4;
 				}
-				StockRowManager.inst.updateBars();
+				Main.inst.sm.updateBars();
 				
 				trace("");
 				
@@ -112,13 +112,13 @@
 				while (par[askIndex] != "ASK") {
 					askIndex++;
 				}
-				StockRowManager.inst.getStockRowByName(par[2]).updateAskBid(Number(par[askIndex + 2]), Number(par[3]));
+				Main.inst.sm.getStockRowByName(par[2]).updateAskBid(Number(par[askIndex + 2]), Number(par[3]));
 				trace("");
 			}
 			
 			else if (par[0] == "MY_SECURITIES_OUT") {
 				for (var own:int = 0; own < 10; own++) {
-					StockRowManager.inst.getStockRowByName(par[index]).updateMySecurities(Number(par[index + 1]));
+					Main.inst.sm.getStockRowByName(par[index]).updateMySecurities(Number(par[index + 1]));
 					index += 3;
 				}
 				trace("");
@@ -133,7 +133,7 @@
 					trace(par[a]);
 				}
 			}
-			StockRowManager.inst.updateDisplay();
+			Main.inst.sm.updateDisplay();
 		
 		}
 		

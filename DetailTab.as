@@ -167,11 +167,11 @@
 		
 		private function sendAskOrder(stock:String, price:String, quant:String):void
 		{
-			if (StockRowManager.inst.getStockRowByName(stock).stockAmt > 0)
+			if (Main.inst.sm.getStockRowByName(stock).stockAmt > 0)
 			{
 				NetworkManager(Main.inst.manager).ask(stock, price, quant);
 			}	
-		
+		}
 		private function sendBidOrder(stock:String, price:String, quant:String):void
 		{
 			NetworkManager(Main.inst.manager).bid(stock, price, quant);

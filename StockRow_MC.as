@@ -50,8 +50,8 @@
 		}
 		
 		public function updateWorth(i:Number):void {
-			if (i > StockRowManager.inst.maxWorth) {
-				StockRowManager.inst.maxWorth = i + 5;
+			if (i > Main.inst.sm.maxWorth) {
+				Main.inst.sm.maxWorth = i + 5;
 			}
 			var str:String = i.toString();
 			netWorthTxt.text = str.slice(0, str.indexOf(".") + 5);
@@ -64,6 +64,8 @@
 			grade = grade < -20 ? -20 : grade > 20 ? 20 : grade;
 			
 			netWorth = i;
+			
+			
 		}
 		
 		public function updateDividend(i:Number):void {
@@ -87,7 +89,7 @@
 		}
 		
 		public function updateBar():void {
-			var newScale:Number = netWorth / StockRowManager.inst.maxWorth;
+			var newScale:Number = netWorth / Main.inst.sm.maxWorth;
 			var clr:int;
 			var amt:Number = grade/20;
 			

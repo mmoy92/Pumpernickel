@@ -7,7 +7,9 @@ package {
 	{
 		public var manager:NetworkManager;
 		public var dt:DetailTab;
-		private var sm:StockRowManager;
+		public var sm:StockRowManager;
+		
+		public var gm:GraphManager;
 		
 		public static var inst:Main;
 		
@@ -22,6 +24,7 @@ package {
 			removeEventListener(Event.ADDED_TO_STAGE, onAdd);
 			dt = DetailTab(this.getChildByName("detailTab_MC"));
 			sm = new StockRowManager();
+			gm = new GraphManager();
 		}
 
 	}
