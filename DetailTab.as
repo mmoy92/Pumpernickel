@@ -10,6 +10,7 @@
 	
 	
 	public class DetailTab extends MovieClip {
+		public var cash:Number = 0;
 		
 		private var selectedStock:TextField;
 		private var yourCurBid:TextField;

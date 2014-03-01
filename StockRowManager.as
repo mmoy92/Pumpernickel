@@ -43,15 +43,20 @@ package {
 			allStockRows.push(AAPL, ATVI, EA, FB, GOOG, MSFT, SBUX, SNY, TSLA, TWTR);
 			
 			netWorthTxt = TextField(Main.inst.getChildByName("netCash_TXT"));
-			
-			
+		
 		}
 		
 		public function updateBars():void {
-			var totalWorth:Number = 0;
+			
 			for each (var stockRow:StockRow_MC in allStockRows) {
 				stockRow.updateBar();
-				totalWorth += stockRow.netWorth;
+			}
+		}
+		
+		public function updateDisplay():void {
+			var totalWorth:Number = Main.inst.dt.cash;
+			for each (var stockRow:StockRow_MC in allStockRows) {
+				totalWorth += stockRow.stockAmt * stockRow.askPrice;
 			}
 			netWorthTxt.text = totalWorth.toString();
 		}

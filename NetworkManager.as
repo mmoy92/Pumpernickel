@@ -66,7 +66,7 @@
 			socket.writeUTFBytes("MY_SECURITIES");
 			socket.writeUTFBytes("\n");
 			socket.flush()
-			
+		
 		}
 		
 		private function sendCommand(text:String):void {
@@ -107,37 +107,40 @@
 					StockRowManager.inst.getStockRowByName(par[index]).updateWorth(Number(par[index + 1]));
 					StockRowManager.inst.getStockRowByName(par[index]).updateDividend(Number(par[index + 2]));
 					//StockRowManager.inst.getStockRowByName(par[index]).updateVolatility(Number(par[index+3]));
-	
+					
 					index += 4;
 				}
+				StockRowManager.inst.updateBars();
+				
 				trace("");
 				
-				StockRowManager.inst.updateBars();
 			} else if (par[0] == "SECURITY_OFFERS_OUT") {
 				while (par[askIndex] != "ASK") {
 					askIndex++;
 				}
-				StockRowManager.inst.getStockRowByName(par[2]).updateAskBid(Number(par[askIndex + 2]), Number(par[3]) );
+				StockRowManager.inst.getStockRowByName(par[2]).updateAskBid(Number(par[askIndex + 2]), Number(par[3]));
 				trace("");
 			}
 			
-			else if ( par[0] == "MY_SECURITIES_OUT") {
-				for ( var own:int = 0; own < 10; own++) {
+			else if (par[0] == "MY_SECURITIES_OUT") {
+				for (var own:int = 0; own < 10; own++) {
 					StockRowManager.inst.getStockRowByName(par[index]).updateMySecurities(Number(par[index + 1]));
 					index += 3;
 				}
 				trace("");
 			}
 			
-			else if ( par[0] == "MY_CASH_OUT") {
+			else if (par[0] == "MY_CASH_OUT") {
+				Main.inst.dt.cash = par[1];
 				DetailTab(Main.inst.dt).setCurrentCash(par[1]);
 				trace("");
-			}
-			else {
-				for ( var a:int = 0; a < par.length; a++) {
+			} else {
+				for (var a:int = 0; a < par.length; a++) {
 					trace(par[a]);
 				}
 			}
+			StockRowManager.inst.updateDisplay();
+		
 		}
 	
 	}
