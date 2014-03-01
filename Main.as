@@ -7,6 +7,7 @@ package {
 	{
 		private var manager:NetworkManager;
 		private var dt:DetailTab;
+		private var sm:StockRowManager;
 		
 		public static var inst:Main;
 		
@@ -20,6 +21,7 @@ package {
 		private function onAdd(e:Event):void {
 			removeEventListener(Event.ADDED_TO_STAGE, onAdd);
 			dt = DetailTab(this.getChildByName("detailTab_MC"));
+			sm = new StockRowManager();
 		}
 
 	}

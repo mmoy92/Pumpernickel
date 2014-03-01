@@ -52,7 +52,7 @@
 		
 		public function updateBar():void {
 			bar.scaleX = netWorth / StockRowManager.inst.maxWorth;
-			dividendTxt.x = bar.width - dividendTxt.textWidth;
+			dividendTxt.x = bar.x + bar.width - dividendTxt.textWidth;
 		}
 	}
 
